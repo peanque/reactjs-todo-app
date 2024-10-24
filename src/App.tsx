@@ -3,12 +3,7 @@ import { v4 as uuid } from 'uuid';
 import './App.css'
 import { AddTodo } from './components/addTodo';
 import { ListTodo } from './components/listTodo';
-
-interface Task {
-  id: string;
-  text: string;
-  completed: boolean;
-}
+import { Task } from './types/todoInterface';
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>(() => {
