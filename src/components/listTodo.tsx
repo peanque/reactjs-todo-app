@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import styled from "@emotion/styled";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 interface Task {
   id: string;
@@ -9,7 +10,8 @@ interface Task {
 
 interface ListTodoProps {
   todo: Task[];
-  toggleTaskCompletion: (taskId: string) => void; 
+  toggleTaskCompletion: (taskId: string) => void;
+  deleteTask: (taskId: string) => void; 
 }
 
 const ListItem = styled.li({
@@ -18,7 +20,8 @@ const ListItem = styled.li({
   padding: "10px",
   listStyle: "none",
   border: "1px solid #c0c0c0",
-  textAlign: "left"
+  textAlign: "left",
+  justifyContent: "space-between"
 });
 
 const Checkbox = styled.input({
@@ -53,17 +56,28 @@ const ListContainer = styled.ul({
 });
 
 
-export const ListTodo: FC<ListTodoProps> = ({ todo, toggleTaskCompletion }) => {
+export const ListTodo: FC<ListTodoProps> = ({ todo, toggleTaskCompletion, deleteTask }) => {
   return (
     <ListContainer>
       {todo.map((task) => (
         <ListItem key={task.id} className="task">
+          <div style={{ display: "flex" }}>
             <Checkbox
                 type="checkbox"
                 checked={task.completed}
                 onChange={() => toggleTaskCompletion(task.id)}
             />
             <span>{task.text}</span>
+          </div>
+          <TrashIcon 
+            style={{ 
+              width: '24px', 
+              height: '24px', 
+              cursor: 'pointer', 
+              fill: '#FFF'}} 
+              className="trash-icon"
+              onClick={() => deleteTask(task.id) }
+          />
         </ListItem>
       ))}
     </ListContainer>

@@ -43,6 +43,10 @@ function App() {
     ));
   }
 
+  const deleteTask = (taskId: string) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  }
+
   return (
     <div className="app">
       <header className="header">
@@ -50,7 +54,7 @@ function App() {
       </header>
       <div className="input-container">
         <AddTodo addTask={addTask} />
-        <ListTodo todo={tasks} toggleTaskCompletion={toggleTaskCompletion} />
+        <ListTodo todo={tasks} toggleTaskCompletion={toggleTaskCompletion} deleteTask={deleteTask} />
       </div>
     </div>
   )
